@@ -10,25 +10,40 @@ import UIKit
 import ReactorKit
 import RxSwift
 import RIBs
+import ReusableKit
 
 protocol MainPresentableListener: AnyObject {
 }
 
 final class MainViewController: BaseViewController {
+    // MARK: - Constants
+    typealias Reactor = MainViewReactor
+    struct Reusable {
+        static let recommendCell = ReusableCell<RecommendBannerCell>()
+        static let todayCell = ReusableCell<TodayContentCell>()
+        static let headerView = ReusableView<NetflixSectionHeaderView>()
+        static let footerView = ReusableView<LoadingFooterView>()
+    }
     
     // MARK: Properties
     weak var listener: MainPresentableListener?
+    var adapter: UICollectionViewAdapter<NetflixSectionModel>?
     
     // MARK: UI
+    let layout: UICollectionViewCompositionalLayout = NetflixStyleLayout.createLayout()
     lazy var collectionView: BaseCollectionView = BaseCollectionView(
         frame: .zero,
-        collectionViewLayout: UICollectionViewFlowLayout()
-    )
+        collectionViewLayout: self.layout
+    ).then {
+        $0.register(Reusable.recommendCell)
+        $0.register(Reusable.todayCell)
+        $0.register(Reusable.headerView, kind: .header)
+    }
     
     // MARK: Initializing
     
     init() {
-//        defer { self.reactor = reactor }
+        defer { self.reactor = Reactor() }
         super.init()
         self.setupUI()
     }
@@ -54,6 +69,14 @@ final class MainViewController: BaseViewController {
 private extension MainViewController {
     func setupUI() {
         self.rootFlexContainer.addSubview(self.collectionView)
+    }
+}
+
+extension MainViewController: ReactorKit.View {
+    func bind(reactor: Reactor) {
+        // MARK: - Action
+        // MARK: - State
+        self.bindCollectionView(reactor: reactor)
     }
 }
 

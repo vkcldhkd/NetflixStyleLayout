@@ -17,7 +17,8 @@ final class UICollectionViewAdapter<Section: SectionModelType>: NSObject, UIColl
     typealias DataSource = RxCollectionViewSectionedReloadDataSource<Section>
     typealias CellProvider = (UICollectionView, IndexPath, SectionItem) -> UICollectionViewCell
     typealias SizeProvider = (UICollectionView, UICollectionViewLayout, IndexPath, SectionItem) -> CGSize
-    
+    typealias HeaderViewProvider = (UICollectionView, IndexPath, Section) -> UICollectionReusableView
+    typealias FooterViewProvider = (UICollectionView, IndexPath, Section) -> UICollectionReusableView
     
     // MARK: - Properties
     private let collectionView: UICollectionView
@@ -28,11 +29,16 @@ final class UICollectionViewAdapter<Section: SectionModelType>: NSObject, UIColl
                 return self.cellProvider(collectionView, indexPath, item)
             },
             configureSupplementaryView: { [weak self] _, collectionView, kind, indexPath in
+                let defaultView: UICollectionReusableView = UICollectionReusableView()
+                guard let section = self?.dataSource.sectionModels[indexPath.section] else { return defaultView }
+                
                 switch kind {
+                case UICollectionView.elementKindSectionHeader:
+                    return self?.headerViewProvider?(collectionView, indexPath, section) ?? defaultView
+
                 case UICollectionView.elementKindSectionFooter:
-                    guard let self = self else { return UICollectionReusableView() }
-                    guard let footerView = self.footerView else { return UICollectionReusableView() }
-                    return collectionView.dequeue(footerView, kind: kind, for: indexPath)
+                    return self?.footerViewProvider?(collectionView, indexPath, section) ?? defaultView
+
                 default:
                     return UICollectionReusableView()
                 }
@@ -46,10 +52,9 @@ final class UICollectionViewAdapter<Section: SectionModelType>: NSObject, UIColl
     // MARK: - Provider
     private let cellProvider: CellProvider
     private var sizeProvider: SizeProvider?
+    private let headerViewProvider: HeaderViewProvider?
+    private let footerViewProvider: FooterViewProvider?
     
-    // MARK: - Footer
-    private var isFooterVisible: Bool = false
-    private let footerView: ReusableView<LoadingFooterView>?
     // MARK: - Rx 외부 바인딩
     var reachedBottom: Observable<Void> {
         return self.collectionView.rx.isReachedBottom.asObservable()
@@ -60,14 +65,14 @@ final class UICollectionViewAdapter<Section: SectionModelType>: NSObject, UIColl
         collectionView: UICollectionView,
         cellProvider: @escaping CellProvider,
         sizeProvider: SizeProvider? = nil,
-        footerView: ReusableView<LoadingFooterView>? = nil
-//        supplementaryViewProvider: SupplementaryViewProvider? = nil
+        headerViewProvider: HeaderViewProvider? = nil,
+        footerViewProvider: FooterViewProvider? = nil
     ) {
         self.collectionView = collectionView
         self.cellProvider = cellProvider
         self.sizeProvider = sizeProvider
-        self.footerView = footerView
-//        self.supplementaryViewProvider = supplementaryViewProvider
+        self.headerViewProvider = headerViewProvider
+        self.footerViewProvider = footerViewProvider
         super.init()
         
 
@@ -91,14 +96,14 @@ final class UICollectionViewAdapter<Section: SectionModelType>: NSObject, UIColl
         }
     }
     
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        referenceSizeForFooterInSection section: Int
-    ) -> CGSize {
-        guard self.footerView != nil else { return .zero }
-        return CGSize(width: collectionView.bounds.width, height: 44)
-    }
+//    func collectionView(
+//        _ collectionView: UICollectionView,
+//        layout collectionViewLayout: UICollectionViewLayout,
+//        referenceSizeForFooterInSection section: Int
+//    ) -> CGSize {
+//        guard self.footerView != nil else { return .zero }
+//        return CGSize(width: collectionView.bounds.width, height: 44)
+//    }
 }
 
 extension UICollectionViewAdapter {
@@ -116,12 +121,12 @@ extension UICollectionViewAdapter {
         state: Observable<State>,
         sectionMapper: @escaping (State) -> [Section]
     ) {
-        if let footerView = self.footerView {
-            self.collectionView.register(footerView, kind: UICollectionView.elementKindSectionFooter)
-            if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-                layout.footerReferenceSize = CGSize(width: 1, height: 1)
-            }
-        }
+//        if let footerView = self.footerView {
+//            self.collectionView.register(footerView, kind: UICollectionView.elementKindSectionFooter)
+//            if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+//                layout.footerReferenceSize = CGSize(width: 1, height: 1)
+//            }
+//        }
         
         self.collectionView.rx.setDelegate(self)
             .disposed(by: self.disposeBag)
