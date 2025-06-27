@@ -30,7 +30,9 @@ final class RecommendBannerCell: BaseCollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.thumbnailImageView.pin.all(4)
+        self.thumbnailImageView.pin
+            .top(4).bottom(4)
+            .left(16).right(16)
     }
 }
 

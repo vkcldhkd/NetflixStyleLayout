@@ -42,8 +42,8 @@ extension NetflixStyleLayout {
 
                    let section = NSCollectionLayoutSection(group: group)
                    section.orthogonalScrollingBehavior = .continuous
-                   section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8)
-//                   section.interGroupSpacing = 12
+                   section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
+                   section.interGroupSpacing = 8
                    
                    // 헤더 사이즈 정의
                    let headerSize = NSCollectionLayoutSize(

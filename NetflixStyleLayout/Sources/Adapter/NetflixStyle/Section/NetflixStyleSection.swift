@@ -17,8 +17,8 @@ extension NetflixStyleSection {
     var title: String {
         switch self {
         case .recommend: return "추천 콘텐츠"
-        case .today: return "오늘의 콘텐츠"
-        case .watching: return "시청 중"
+        case .today: return "회원님을 위해 엄선한 오늘의 콘텐츠"
+        case .watching: return "회원 님이 시청 중인 콘텐츠"
         case .games: return "모바일 게임"
         }
     }
@@ -32,7 +32,7 @@ enum NetflixSectionItem {
     case recommend(RecommendBannerCellReactor)
     case today(TodayContentCellReactor)
     case watching
-    case game
+    case game(GameCellReactor)
 }
 
 struct NetflixSectionModel {

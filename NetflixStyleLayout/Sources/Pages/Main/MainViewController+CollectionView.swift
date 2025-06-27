@@ -26,6 +26,11 @@ extension MainViewController {
                     cell.reactor = cellReactor
                     return cell
                     
+                case let .game(cellReactor):
+                    let cell = collectionView.dequeue(Reusable.gameCell, for: indexPath)
+                    cell.reactor = cellReactor
+                    return cell
+                    
                 default: return UICollectionViewCell()
                 }
             },
@@ -38,15 +43,16 @@ extension MainViewController {
         )
         
         // MARK: - Action
-        self.adapter?.itemSelected { item in
-            switch item {
-            case let .recommend(cellReactor):
-                print("recommend item: \(item)")
-                
-            case let .today(cellReactor):
-                print("today item: \(item)")
-            default: return
-            }
+        self.adapter?.itemSelected { [weak self] item in
+            self?.listener?.didTapRecommend()
+//            switch item {
+//            case let .recommend(cellReactor):
+//                print("recommend item: \(item)")
+//                
+//            case let .today(cellReactor):
+//                print("today item: \(item)")
+//            default: return
+//            }
         }
         
         // MARK: - State

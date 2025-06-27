@@ -13,6 +13,7 @@ import RIBs
 import ReusableKit
 
 protocol MainPresentableListener: AnyObject {
+    func didTapRecommend()
 }
 
 final class MainViewController: BaseViewController {
@@ -21,6 +22,7 @@ final class MainViewController: BaseViewController {
     struct Reusable {
         static let recommendCell = ReusableCell<RecommendBannerCell>()
         static let todayCell = ReusableCell<TodayContentCell>()
+        static let gameCell = ReusableCell<GameCell>()
         static let headerView = ReusableView<NetflixSectionHeaderView>()
         static let footerView = ReusableView<LoadingFooterView>()
     }
@@ -37,7 +39,9 @@ final class MainViewController: BaseViewController {
     ).then {
         $0.register(Reusable.recommendCell)
         $0.register(Reusable.todayCell)
+        $0.register(Reusable.gameCell)
         $0.register(Reusable.headerView, kind: .header)
+        $0.contentInsetAdjustmentBehavior = .never
     }
     
     // MARK: Initializing

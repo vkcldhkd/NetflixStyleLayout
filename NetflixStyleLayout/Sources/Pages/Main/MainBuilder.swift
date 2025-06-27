@@ -7,7 +7,7 @@
 
 import RIBs
 
-protocol MainDependency: Dependency {
+protocol MainDependency: Dependency, DetailDependency {
     // TODO: Declare the set of dependencies required by this RIB, but cannot be
     // created by this RIB.
 }
@@ -32,8 +32,16 @@ final class MainBuilder: Builder<MainDependency>, MainBuildable {
     func build(withListener listener: MainListener) -> MainRouting {
         let component = MainComponent(dependency: dependency)
         let viewController = MainViewController()
+        
         let interactor = MainInteractor(presenter: viewController)
         interactor.listener = listener
-        return MainRouter(interactor: interactor, viewController: viewController)
+        
+        let detailBuilder = DetailBuilder(dependency: component.dependency)
+        
+        return MainRouter(
+            interactor: interactor,
+            viewController: viewController,
+            detailBuilder: detailBuilder
+        )
     }
 }

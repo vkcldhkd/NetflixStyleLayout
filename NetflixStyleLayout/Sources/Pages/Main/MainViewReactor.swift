@@ -68,11 +68,12 @@ private extension MainViewReactor {
         ])
         
         let games = NetflixSectionModel(section: .games, items: [
-            .today(TodayContentCellReactor()),
-            .today(TodayContentCellReactor()),
-            .today(TodayContentCellReactor()),
-            .today(TodayContentCellReactor()),
-            .today(TodayContentCellReactor()),
+            .game(GameCellReactor()),
+            .game(GameCellReactor()),
+            .game(GameCellReactor()),
+            .game(GameCellReactor()),
+            .game(GameCellReactor()),
+            .game(GameCellReactor()),
         ])
         
         return [recommendSection, todaySection, watching, games]

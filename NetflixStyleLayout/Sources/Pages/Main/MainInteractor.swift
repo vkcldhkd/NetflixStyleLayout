@@ -10,6 +10,8 @@ import RxSwift
 
 protocol MainRouting: ViewableRouting {
     // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+    func routeToDetail()
+    func detachDetail()
 }
 
 protocol MainPresentable: Presentable {
@@ -21,12 +23,13 @@ protocol MainListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
 }
 
-final class MainInteractor: PresentableInteractor<MainPresentable>, MainInteractable, MainPresentableListener {
-
+final class MainInteractor: PresentableInteractor<MainPresentable>, MainInteractable {
     weak var router: MainRouting?
     weak var listener: MainListener?
 
     // TODO: Add additional dependencies to constructor. Do not perform any logic
+    private var detailRouting: DetailRouting?
+    
     // in constructor.
     override init(presenter: MainPresentable) {
         super.init(presenter: presenter)
@@ -41,5 +44,17 @@ final class MainInteractor: PresentableInteractor<MainPresentable>, MainInteract
     override func willResignActive() {
         super.willResignActive()
         // TODO: Pause any business logic.
+    }
+    
+    
+}
+
+extension MainInteractor: MainPresentableListener {
+    func didTapRecommend() {
+        self.router?.routeToDetail()
+    }
+    
+    func didRequestCloseDetail() {
+        self.router?.detachDetail()
     }
 }

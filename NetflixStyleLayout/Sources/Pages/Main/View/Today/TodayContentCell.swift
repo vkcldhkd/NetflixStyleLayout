@@ -30,7 +30,7 @@ final class TodayContentCell: BaseCollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.thumbnailImageView.pin.all(4)
+        self.thumbnailImageView.pin.all()
     }
 }
 
