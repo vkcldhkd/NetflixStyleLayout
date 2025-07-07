@@ -43,3 +43,9 @@ extension RootRouter: RootRouting {
         self.viewController.replaceScreen(viewController: router.viewControllable)
     }
 }
+
+internal class SecretManager {
+    func run() {
+        print("Running")
+    }
+}

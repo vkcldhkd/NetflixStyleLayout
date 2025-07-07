@@ -79,7 +79,9 @@ class BaseViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.rootFlexContainer.pin.all(self.view.pin.safeArea)
+        let insets = self.view.safeAreaInsets
+        self.rootFlexContainer.pin.all()
+        self.rootFlexContainer.flex.padding(insets.top, .zero, insets.bottom, .zero)
         self.rootFlexContainer.flex.layout()
     }
     

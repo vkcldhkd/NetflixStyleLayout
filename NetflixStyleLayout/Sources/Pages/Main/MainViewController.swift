@@ -65,7 +65,8 @@ final class MainViewController: BaseViewController {
     
     override func setupConstraints() {
         self.rootFlexContainer.flex.define { flex in
-            flex.addItem(self.collectionView).grow(1)
+            flex.addItem(self.collectionView)
+                .grow(1)
         }
     }
 }

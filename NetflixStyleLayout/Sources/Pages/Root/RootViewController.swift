@@ -7,6 +7,7 @@
 
 import RIBs
 import RxSwift
+import RxCocoa
 import UIKit
 
 protocol RootPresentableListener: AnyObject {
@@ -56,5 +57,18 @@ extension RootViewController {
         // 4. 마무리
         newVC.didMove(toParent: self)
         self.currentViewController = viewController
+    }
+    
+    func test() {
+        let subject = PublishSubject<String>()
+        subject.flatMapLatest { keyword in
+            Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.asyncInstance)
+                .map { "\(keyword): \($0)" }
+        }
+        subject
+            .asDriver(onErrorDriveWith: .empty())
+            .drive(self.rx.title)
+            .disposed(by: self.disposeBag)
+        
     }
 }
