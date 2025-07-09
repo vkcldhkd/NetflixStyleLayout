@@ -17,6 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         
+//        window.rootViewController = CounterViewController()
         let launchRouter = RootBuilder(dependency: AppComponent()).build()
         self.launchRouter = launchRouter
         launchRouter.launch(from: window)
