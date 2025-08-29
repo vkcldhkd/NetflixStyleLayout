@@ -26,13 +26,10 @@ extension NetflixStyleSection {
 
 
 enum NetflixSectionItem {
-//    case watching(WatchingProgressReactor)
-//    case game(GameIconReactor)
-    
-    case recommend(RecommendBannerCellReactor)
-    case today(TodayContentCellReactor)
-    case watching
-    case game(GameCellReactor)
+    case recommend(ContentCellReactor)
+    case today(ContentCellReactor)
+    case watching(ContentCellReactor)
+    case game(ContentCellReactor)
 }
 
 struct NetflixSectionModel {

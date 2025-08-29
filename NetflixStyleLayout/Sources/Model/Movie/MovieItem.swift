@@ -6,9 +6,7 @@
 //
 
 
-struct MovieResponse: Codable {
-    let items: [MovieItemElement]?
-}
+typealias MovieResponse = [MovieItemElement]
 
 // MARK: - MovieItemElement
 struct MovieItemElement: Codable {

@@ -12,11 +12,11 @@ import ReactorKit
 
 final class GameCell: BaseCollectionViewCell {
     // MARK: - Constants
-    typealias Reactor = GameCellReactor
+    typealias Reactor = ContentCellReactor
     
     // MARK: - UI
     private let iconImageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
+        $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
         $0.backgroundColor = .gray
     }
@@ -64,5 +64,9 @@ extension GameCell: ReactorKit.View {
         // MARK: - Action
         
         // MARK: - State
+        reactor.state.map { $0.model.image?.medium }
+            .map { URLHelper.createEncodedURL(url: $0) }
+            .bind(to: self.iconImageView.kf.rx.image())
+            .disposed(by: self.disposeBag)
     }
 }

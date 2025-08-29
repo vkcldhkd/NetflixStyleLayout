@@ -61,11 +61,6 @@ final class MainViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        TvmazeService.search()
-            .subscribe(onNext: {
-                print("response: \($0)")
-            })
-            .disposed(by: self.disposeBag)
     }
     
     override func setupConstraints() {
@@ -85,7 +80,14 @@ private extension MainViewController {
 extension MainViewController: ReactorKit.View {
     func bind(reactor: Reactor) {
         // MARK: - Action
+        self.reactor?.action.onNext(.load)
+        
         // MARK: - State
+        reactor.state.map { $0.isLoading }
+            .distinctUntilChanged()
+            .bind(to: self.loadingView.rx.isAnimating)
+            .disposed(by: self.disposeBag)
+        
         self.bindCollectionView(reactor: reactor)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  RecommendBannerCellReactor.swift
+//  ContentCellReactor.swift
 //  NetflixStyleLayout
 //
 //  Created by HYUN SUNG on 6/26/25.
@@ -8,7 +8,7 @@
 import ReactorKit
 import RxSwift
 
-final class RecommendBannerCellReactor: Reactor {
+final class ContentCellReactor: Reactor {
     enum Action {
     }
     
@@ -16,13 +16,14 @@ final class RecommendBannerCellReactor: Reactor {
     }
     
     struct State {
+        var model: MovieItemElement
     }
     
     let initialState: State
     
-    init() {
+    init(model: MovieItemElement) {
         defer { _ = self.state }
-        self.initialState = State()
+        self.initialState = State(model: model)
     }
     
     func mutate(action: Action) -> Observable<Mutation> {

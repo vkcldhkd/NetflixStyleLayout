@@ -51,7 +51,7 @@ extension NetworkManager {
                             } else if let array = jsonObject as? [[String: Any]],
                                       let first = array.first {
                                 // 응답이 Array일 경우 → 첫 번째 Dictionary만 전달
-                                observer.onNext(["items": first])
+                                observer.onNext(first)
                                 observer.onCompleted()
                             } else {
                                 // Dictionary도, Dictionary 배열도 아닐 경우
@@ -79,29 +79,25 @@ extension NetworkManager {
 }
 
 extension NetworkManager {
-    /// JSON을 T로 바로 디코딩 (배열/객체 모두 가능)
     static func requestDecodable<T: Decodable>(
+        type: T.Type,
         method: HTTPMethod,
         parameters: Parameters? = nil,
         url: String,
         headers: HTTPHeaders? = nil,
         decoder: JSONDecoder = JSONDecoder()
     ) -> Observable<T> {
-        print("requestURL:\(url)")
-        print("requestmethod:\(method)")
-
         return Observable.create { observer in
-            let request = NetworkManager.session
-                .request(
-                    url,
-                    method: method,
-                    parameters: parameters,
-                    encoding: URLEncoding.default,
-                    headers: headers
-                )
+            let request = session.request(
+                url,
+                method: method,
+                parameters: parameters,
+                encoding: URLEncoding.default,
+                headers: headers
+            )
                 .validate(statusCode: 200..<300)
-                .responseDecodable(of: T.self, decoder: decoder) { response in
-                    switch response.result {
+                .responseDecodable(of: T.self, decoder: decoder) { resp in
+                    switch resp.result {
                     case let .success(value):
                         observer.onNext(value)
                         observer.onCompleted()
@@ -109,8 +105,8 @@ extension NetworkManager {
                         observer.onError(error)
                     }
                 }
-
             return Disposables.create { request.cancel() }
         }
     }
 }
+

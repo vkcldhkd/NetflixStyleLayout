@@ -12,7 +12,7 @@ import ReactorKit
 
 final class TodayContentCell: BaseCollectionViewCell {
     // MARK: - Constants
-    typealias Reactor = TodayContentCellReactor
+    typealias Reactor = ContentCellReactor
     
     // MARK: - UI
     private let thumbnailImageView = UIImageView().then {
@@ -57,5 +57,9 @@ extension TodayContentCell: ReactorKit.View {
         // MARK: - Action
         
         // MARK: - State
+        reactor.state.map { $0.model.image?.medium }
+            .map { URLHelper.createEncodedURL(url: $0) }
+            .bind(to: self.thumbnailImageView.kf.rx.image())
+            .disposed(by: self.disposeBag)
     }
 }

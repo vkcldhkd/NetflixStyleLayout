@@ -17,6 +17,7 @@
 		A89AA0312E0D10A20020DB92 /* LookinServer in Frameworks */ = {isa = PBXBuildFile; productRef = A89AA0302E0D10A20020DB92 /* LookinServer */; };
 		A8AAA1B12E61DEE90021C2BC /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A8AAA1B02E61DEE90021C2BC /* Alamofire */; };
 		A8AAA2EF2E61E4300021C2BC /* Codextended in Frameworks */ = {isa = PBXBuildFile; productRef = A8AAA2EE2E61E4300021C2BC /* Codextended */; };
+		A8AAA2F62E6209490021C2BC /* RxKingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A8AAA2F52E6209490021C2BC /* RxKingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 				A8AAA2EF2E61E4300021C2BC /* Codextended in Frameworks */,
 				A89A9FEC2E0CE6850020DB92 /* ReactorKit in Frameworks */,
 				A89A9FB52E0A8FD30020DB92 /* RIBs in Frameworks */,
+				A8AAA2F62E6209490021C2BC /* RxKingfisher in Frameworks */,
 				A89AA0312E0D10A20020DB92 /* LookinServer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -158,6 +160,7 @@
 				A89AA0302E0D10A20020DB92 /* LookinServer */,
 				A8AAA1B02E61DEE90021C2BC /* Alamofire */,
 				A8AAA2EE2E61E4300021C2BC /* Codextended */,
+				A8AAA2F52E6209490021C2BC /* RxKingfisher */,
 			);
 			productName = NetflixStyleLayout;
 			productReference = A89A9E1D2E0A8ECC0020DB92 /* NetflixStyleLayout.app */;
@@ -252,6 +255,7 @@
 				A89AA02F2E0D10A10020DB92 /* XCRemoteSwiftPackageReference "LookinServer" */,
 				A8AAA1AF2E61DEE90021C2BC /* XCRemoteSwiftPackageReference "Alamofire" */,
 				A8AAA2ED2E61E4300021C2BC /* XCRemoteSwiftPackageReference "Codextended" */,
+				A8AAA2F42E6209480021C2BC /* XCRemoteSwiftPackageReference "RxKingfisher" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A89A9E1E2E0A8ECC0020DB92 /* Products */;
@@ -698,6 +702,14 @@
 				minimumVersion = 0.3.0;
 			};
 		};
+		A8AAA2F42E6209480021C2BC /* XCRemoteSwiftPackageReference "RxKingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxKingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -750,6 +762,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A8AAA2ED2E61E4300021C2BC /* XCRemoteSwiftPackageReference "Codextended" */;
 			productName = Codextended;
+		};
+		A8AAA2F52E6209490021C2BC /* RxKingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A8AAA2F42E6209480021C2BC /* XCRemoteSwiftPackageReference "RxKingfisher" */;
+			productName = RxKingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -1,5 +1,5 @@
 {
-  "originHash" : "369a0ba2ecdc8ad60b722ffb354932929138f731f9a142792cfd0de46e68e011",
+  "originHash" : "917a6f859a0b8a424b8293cced03cce7f0b69eb3b36cce2c5a83a82961f14024",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -26,6 +26,15 @@
       "state" : {
         "revision" : "d5bec8389cb70a37a37f3575d7502f144c807540",
         "version" : "2.2.1"
+      }
+    },
+    {
+      "identity" : "kingfisher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/onevcat/Kingfisher.git",
+      "state" : {
+        "revision" : "1a0c2df04b31ed7aa318354f3583faea24f006fc",
+        "version" : "5.15.8"
       }
     },
     {
@@ -80,6 +89,15 @@
       "state" : {
         "revision" : "90c29b48b628479097fe775ed1966d75ac374518",
         "version" : "5.0.2"
+      }
+    },
+    {
+      "identity" : "rxkingfisher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/RxSwiftCommunity/RxKingfisher",
+      "state" : {
+        "revision" : "5f195d1c9a21e3ca930d1bfef24335c8b752ea64",
+        "version" : "2.1.0"
       }
     },
     {

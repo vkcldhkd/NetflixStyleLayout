@@ -9,10 +9,11 @@ import UIKit
 import FlexLayout
 import PinLayout
 import ReactorKit
+import RxKingfisher
 
 final class RecommendBannerCell: BaseCollectionViewCell {
     // MARK: - Constants
-    typealias Reactor = RecommendBannerCellReactor
+    typealias Reactor = ContentCellReactor
     
     // MARK: - UI
     private let thumbnailImageView = UIImageView().then {
@@ -58,5 +59,9 @@ extension RecommendBannerCell: ReactorKit.View {
         // MARK: - Action
         
         // MARK: - State
+        reactor.state.map { $0.model.image?.medium }
+            .map { URLHelper.createEncodedURL(url: $0) }
+            .bind(to: self.thumbnailImageView.kf.rx.image())
+            .disposed(by: self.disposeBag)
     }
 }

@@ -24,6 +24,7 @@ extension NetworkResponse {
         guard let jsonToData = originalJson.toData() else { return }
         
         do {
+            
             self = NetworkResponse(
                 result: originalJson.count > 0 ? 1 : 0,
                 dateTime: "\(Date())",
@@ -33,5 +34,19 @@ extension NetworkResponse {
         } catch {
             print("NetworkResponse Init Error: \(error)")
         }
+    }
+}
+
+extension NetworkResponse {
+    init(
+        path: String?,
+        item: T?
+    ) {
+        self = NetworkResponse(
+            result: 1,
+            dateTime: "\(Date())",
+            path: path,
+            data: item
+        )
     }
 }

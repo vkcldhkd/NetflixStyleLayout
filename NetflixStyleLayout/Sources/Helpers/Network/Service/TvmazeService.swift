@@ -24,8 +24,8 @@ extension TvmazeService {
             queryItems: queryItems
         )
         
-        return NetworkManager.request(method: .get, url: path)
-            .map { try? NetworkResponse<MovieResponse>.init(path: path, json: $0) }
+        return NetworkManager.requestDecodable(type: MovieResponse.self, method: .get, url: path)
+            .map { NetworkResponse(path: path, item: $0) }
     }
 }
 
