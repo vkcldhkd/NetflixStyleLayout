@@ -15,6 +15,7 @@
 		A89A9FEC2E0CE6850020DB92 /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = A89A9FEB2E0CE6850020DB92 /* ReactorKit */; };
 		A89AA0252E0D0C5E0020DB92 /* ReusableKit in Frameworks */ = {isa = PBXBuildFile; productRef = A89AA0242E0D0C5E0020DB92 /* ReusableKit */; };
 		A89AA0312E0D10A20020DB92 /* LookinServer in Frameworks */ = {isa = PBXBuildFile; productRef = A89AA0302E0D10A20020DB92 /* LookinServer */; };
+		A8AAA1B12E61DEE90021C2BC /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A8AAA1B02E61DEE90021C2BC /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8AAA1B12E61DEE90021C2BC /* Alamofire in Frameworks */,
 				A89A9FDD2E0A90690020DB92 /* Then in Frameworks */,
 				A89AA0252E0D0C5E0020DB92 /* ReusableKit in Frameworks */,
 				A89A9FBB2E0A8FED0020DB92 /* FlexLayout in Frameworks */,
@@ -152,6 +154,7 @@
 				A89A9FEB2E0CE6850020DB92 /* ReactorKit */,
 				A89AA0242E0D0C5E0020DB92 /* ReusableKit */,
 				A89AA0302E0D10A20020DB92 /* LookinServer */,
+				A8AAA1B02E61DEE90021C2BC /* Alamofire */,
 			);
 			productName = NetflixStyleLayout;
 			productReference = A89A9E1D2E0A8ECC0020DB92 /* NetflixStyleLayout.app */;
@@ -244,6 +247,7 @@
 				A89A9FEA2E0CE6850020DB92 /* XCRemoteSwiftPackageReference "ReactorKit" */,
 				A89AA0232E0D0C5D0020DB92 /* XCRemoteSwiftPackageReference "ReusableKit" */,
 				A89AA02F2E0D10A10020DB92 /* XCRemoteSwiftPackageReference "LookinServer" */,
+				A8AAA1AF2E61DEE90021C2BC /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A89A9E1E2E0A8ECC0020DB92 /* Products */;
@@ -674,6 +678,14 @@
 				minimumVersion = 1.2.8;
 			};
 		};
+		A8AAA1AF2E61DEE90021C2BC /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -716,6 +728,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A89AA02F2E0D10A10020DB92 /* XCRemoteSwiftPackageReference "LookinServer" */;
 			productName = LookinServer;
+		};
+		A8AAA1B02E61DEE90021C2BC /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A8AAA1AF2E61DEE90021C2BC /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
