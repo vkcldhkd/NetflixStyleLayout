@@ -61,6 +61,11 @@ final class MainViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        TvmazeService.search()
+            .subscribe(onNext: {
+                print("response: \($0)")
+            })
+            .disposed(by: self.disposeBag)
     }
     
     override func setupConstraints() {

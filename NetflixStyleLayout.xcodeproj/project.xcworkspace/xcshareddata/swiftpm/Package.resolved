@@ -1,5 +1,5 @@
 {
-  "originHash" : "78226c13dd2ccb6904be5a1ba16773ca1e6167351209e927fae2bbbd410b406c",
+  "originHash" : "369a0ba2ecdc8ad60b722ffb354932929138f731f9a142792cfd0de46e68e011",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "513364f870f6bfc468f9d2ff0a95caccc10044c5",
         "version" : "5.10.2"
+      }
+    },
+    {
+      "identity" : "codextended",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JohnSundell/Codextended",
+      "state" : {
+        "revision" : "8d7c46dfc9c55240870cf5561d6cefa41e3d7105",
+        "version" : "0.3.0"
       }
     },
     {

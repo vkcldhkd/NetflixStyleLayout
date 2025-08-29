@@ -14,9 +14,7 @@ final class NetworkManager {
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = 10
         configuration.timeoutIntervalForResource = 10
-        return Session(
-            configuration: configuration
-        )
+        return Session(configuration: configuration)
     }()
 }
 
@@ -29,7 +27,7 @@ extension NetworkManager {
     ) -> Observable<[String: Any]> {
         print("requestURL:\(url)")
         print("requestmethod:\(method)")
-        
+
         return Observable.create { observer in
             let request = NetworkManager.session
                 .request(
@@ -37,27 +35,37 @@ extension NetworkManager {
                     method: method,
                     parameters: parameters,
                     encoding: URLEncoding.default,
-                    headers: headers,
+                    headers: headers
                 )
                 .validate()
                 .responseData { response in
                     switch response.result {
                     case let .success(data):
                         do {
-                            if let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
-                                observer.onNext(jsonObject)
+                            let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
+
+                            if let dict = jsonObject as? [String: Any] {
+                                // 응답이 Dictionary 형태인 경우
+                                observer.onNext(dict)
+                                observer.onCompleted()
+                            } else if let array = jsonObject as? [[String: Any]],
+                                      let first = array.first {
+                                // 응답이 Array일 경우 → 첫 번째 Dictionary만 전달
+                                observer.onNext(["items": first])
                                 observer.onCompleted()
                             } else {
+                                // Dictionary도, Dictionary 배열도 아닐 경우
                                 let error = NSError(
                                     domain: "NetworkManager",
                                     code: -1,
-                                    userInfo: [NSLocalizedDescriptionKey: "응답이 Dictionary 형태가 아닙니다."]
+                                    userInfo: [NSLocalizedDescriptionKey: "응답이 Dictionary 또는 Dictionary 배열 형태가 아닙니다."]
                                 )
                                 observer.onError(error)
                             }
                         } catch {
                             observer.onError(error)
                         }
+
                     case let .failure(error):
                         observer.onError(error)
                     }
@@ -66,6 +74,43 @@ extension NetworkManager {
             return Disposables.create {
                 request.cancel()
             }
+        }
+    }
+}
+
+extension NetworkManager {
+    /// JSON을 T로 바로 디코딩 (배열/객체 모두 가능)
+    static func requestDecodable<T: Decodable>(
+        method: HTTPMethod,
+        parameters: Parameters? = nil,
+        url: String,
+        headers: HTTPHeaders? = nil,
+        decoder: JSONDecoder = JSONDecoder()
+    ) -> Observable<T> {
+        print("requestURL:\(url)")
+        print("requestmethod:\(method)")
+
+        return Observable.create { observer in
+            let request = NetworkManager.session
+                .request(
+                    url,
+                    method: method,
+                    parameters: parameters,
+                    encoding: URLEncoding.default,
+                    headers: headers
+                )
+                .validate(statusCode: 200..<300)
+                .responseDecodable(of: T.self, decoder: decoder) { response in
+                    switch response.result {
+                    case let .success(value):
+                        observer.onNext(value)
+                        observer.onCompleted()
+                    case let .failure(error):
+                        observer.onError(error)
+                    }
+                }
+
+            return Disposables.create { request.cancel() }
         }
     }
 }

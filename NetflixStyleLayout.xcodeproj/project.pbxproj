@@ -16,6 +16,7 @@
 		A89AA0252E0D0C5E0020DB92 /* ReusableKit in Frameworks */ = {isa = PBXBuildFile; productRef = A89AA0242E0D0C5E0020DB92 /* ReusableKit */; };
 		A89AA0312E0D10A20020DB92 /* LookinServer in Frameworks */ = {isa = PBXBuildFile; productRef = A89AA0302E0D10A20020DB92 /* LookinServer */; };
 		A8AAA1B12E61DEE90021C2BC /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A8AAA1B02E61DEE90021C2BC /* Alamofire */; };
+		A8AAA2EF2E61E4300021C2BC /* Codextended in Frameworks */ = {isa = PBXBuildFile; productRef = A8AAA2EE2E61E4300021C2BC /* Codextended */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 				A89A9FBB2E0A8FED0020DB92 /* FlexLayout in Frameworks */,
 				A89A9FE02E0A91650020DB92 /* RxDataSources in Frameworks */,
 				A89A9FBE2E0A8FF80020DB92 /* PinLayout in Frameworks */,
+				A8AAA2EF2E61E4300021C2BC /* Codextended in Frameworks */,
 				A89A9FEC2E0CE6850020DB92 /* ReactorKit in Frameworks */,
 				A89A9FB52E0A8FD30020DB92 /* RIBs in Frameworks */,
 				A89AA0312E0D10A20020DB92 /* LookinServer in Frameworks */,
@@ -155,6 +157,7 @@
 				A89AA0242E0D0C5E0020DB92 /* ReusableKit */,
 				A89AA0302E0D10A20020DB92 /* LookinServer */,
 				A8AAA1B02E61DEE90021C2BC /* Alamofire */,
+				A8AAA2EE2E61E4300021C2BC /* Codextended */,
 			);
 			productName = NetflixStyleLayout;
 			productReference = A89A9E1D2E0A8ECC0020DB92 /* NetflixStyleLayout.app */;
@@ -248,6 +251,7 @@
 				A89AA0232E0D0C5D0020DB92 /* XCRemoteSwiftPackageReference "ReusableKit" */,
 				A89AA02F2E0D10A10020DB92 /* XCRemoteSwiftPackageReference "LookinServer" */,
 				A8AAA1AF2E61DEE90021C2BC /* XCRemoteSwiftPackageReference "Alamofire" */,
+				A8AAA2ED2E61E4300021C2BC /* XCRemoteSwiftPackageReference "Codextended" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A89A9E1E2E0A8ECC0020DB92 /* Products */;
@@ -686,6 +690,14 @@
 				minimumVersion = 5.10.2;
 			};
 		};
+		A8AAA2ED2E61E4300021C2BC /* XCRemoteSwiftPackageReference "Codextended" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JohnSundell/Codextended";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -733,6 +745,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A8AAA1AF2E61DEE90021C2BC /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		A8AAA2EE2E61E4300021C2BC /* Codextended */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A8AAA2ED2E61E4300021C2BC /* XCRemoteSwiftPackageReference "Codextended" */;
+			productName = Codextended;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
